@@ -20,35 +20,30 @@ class TweetDetailTableViewController: UITableViewController {
         
         var contents: String {
             switch self {
-            case .Media(let media):
-                return media.description
-            case .Hashtag(let hashTag):
-                return hashTag.keyword
-            case .Url(let url):
-                return url.keyword
-            case .User(let user):
-                return user.keyword
+                case .Media(let media): return media.description
+                case .Hashtag(let hashTag): return hashTag.keyword
+                case .Url(let url): return url.keyword
+                case .User(let user): return user.keyword
             }
         }
         
         var titleForHeader: String {
-            get {
-                switch self {
-                case .Media(_):
-                    return "Media"
-                case .Hashtag(_):
-                    return "Hashtags"
-                case .Url(_):
-                    return "Urls"
-                case .User(_):
-                    return "Users"
-                }
+            switch self {
+                case .Media(_): return "Media"
+                case .Hashtag(_): return "Hashtags"
+                case .Url(_): return "Urls"
+                case .User(_): return "Users"
             }
         }
     }
     
     private struct ResuseIdentifiers {
-        static let DetailIdentifier = "Tweet Detail Identifier"
+        static let SelectableDetailIdentifier = "Tweet Selectable Detail Identifier"
+        static let NonSelectableDetailIdentifier = "Tweet Image Detail Identifier"
+    }
+    
+    private struct SegueIdentifiers {
+        static let PushSpecificSearchTerm = "Push Specific Search Term"
     }
     
     // MARK: - TODO: Need to clean this up
@@ -86,6 +81,11 @@ class TweetDetailTableViewController: UITableViewController {
             }
         }
     }
+    
+    override func viewDidLoad() {
+        tableView.estimatedRowHeight = tableView.rowHeight
+        tableView.rowHeight = UITableViewAutomaticDimension
+    }
 
     // MARK: - Table view data source
 
@@ -102,22 +102,53 @@ class TweetDetailTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(ResuseIdentifiers.DetailIdentifier, forIndexPath: indexPath) as! UITableViewCell
-
         let item = stack[indexPath.section][indexPath.row]
-        cell.textLabel?.text = item.contents
-
-        return cell
+        
+        switch item {
+            case .Media(let mediaItem):
+                let cell = tableView.dequeueReusableCellWithIdentifier(ResuseIdentifiers.NonSelectableDetailIdentifier, forIndexPath: indexPath) as! TweetImageTableViewCell
+                cell.url = mediaItem.url
+                return cell
+            default:
+                let cell = tableView.dequeueReusableCellWithIdentifier(ResuseIdentifiers.SelectableDetailIdentifier, forIndexPath: indexPath) as! UITableViewCell
+                cell.textLabel?.text = item.contents
+                cell.accessoryType = .DisclosureIndicator
+                return cell
+        }
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        let item = stack[indexPath.section][indexPath.row]
+        
+        switch item {
+        case .Media(let mediaItem):
+            return tableView.bounds.size.width / CGFloat(mediaItem.aspectRatio)
+        default:
+            return UITableViewAutomaticDimension
+        }
     }
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
+        var destination = segue.destinationViewController as? UIViewController
+        if let navigationController = destination as? UINavigationController {
+            destination = navigationController.visibleViewController
+        }
+        
+        if let tweetTableViewController = destination as? TweetTableViewController {
+            if let identifier = segue.identifier {
+                switch identifier {
+                case SegueIdentifiers.PushSpecificSearchTerm:
+                    if let cell = sender as? UITableViewCell  {
+                        tweetTableViewController.searchText = cell.textLabel?.text
+                    }
+                default:
+                    break
+                }
+            }
+        }
     }
-    */
 
 }

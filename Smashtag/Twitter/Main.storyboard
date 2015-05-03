@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="PLg-GO-rWt">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -111,7 +112,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Tweet Detail Identifier" textLabel="p0U-oj-mvC" style="IBUITableViewCellStyleDefault" id="SIb-Xq-dlm">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Tweet Selectable Detail Identifier" textLabel="p0U-oj-mvC" style="IBUITableViewCellStyleDefault" id="SIb-Xq-dlm">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="SIb-Xq-dlm" id="RSV-o8-Jid">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -124,6 +125,32 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="ESb-8y-so3" kind="show" identifier="Push Specific Search Term" id="fgB-WQ-jxE"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Tweet Image Detail Identifier" rowHeight="195" id="eeH-Bp-tUH" customClass="TweetImageTableViewCell" customModule="Smashtag" customModuleProvider="target">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eeH-Bp-tUH" id="wdc-5d-tRJ">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="r4l-IT-JfQ">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="194"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="r4l-IT-JfQ" secondAttribute="height" multiplier="300:97" id="HGS-Is-FUr"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="r4l-IT-JfQ" firstAttribute="leading" secondItem="wdc-5d-tRJ" secondAttribute="leading" id="0Pu-8V-8CB"/>
+                                        <constraint firstItem="r4l-IT-JfQ" firstAttribute="top" secondItem="wdc-5d-tRJ" secondAttribute="top" id="YnJ-s9-uGG"/>
+                                        <constraint firstAttribute="trailing" secondItem="r4l-IT-JfQ" secondAttribute="trailing" id="jNe-NN-dgy"/>
+                                        <constraint firstAttribute="bottom" secondItem="r4l-IT-JfQ" secondAttribute="bottom" id="tx4-6Q-M9z"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="tweetImage" destination="r4l-IT-JfQ" id="lcG-c6-rc8"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -134,7 +161,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yHN-b8-MaD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2180" y="461"/>
+            <point key="canvasLocation" x="2152" y="463"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="nNY-vz-bMh">
@@ -155,4 +182,7 @@
             <point key="canvasLocation" x="626" y="463"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="fgB-WQ-jxE"/>
+    </inferredMetricsTieBreakers>
 </document>

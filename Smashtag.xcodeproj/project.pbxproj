@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		26232DC71AF1D9AC00F6888E /* TweetDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26232DC61AF1D9AC00F6888E /* TweetDetailTableViewController.swift */; };
+		2657E9F21AF5D05E008F92CE /* TweetImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2657E9F11AF5D05E008F92CE /* TweetImageTableViewCell.swift */; };
 		268047E01AF08E4C00271FA6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268047DF1AF08E4C00271FA6 /* AppDelegate.swift */; };
 		268047E71AF08E4D00271FA6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 268047E61AF08E4D00271FA6 /* Images.xcassets */; };
 		268047EA1AF08E4D00271FA6 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 268047E81AF08E4D00271FA6 /* LaunchScreen.xib */; };
@@ -33,6 +34,7 @@
 
 /* Begin PBXFileReference section */
 		26232DC61AF1D9AC00F6888E /* TweetDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetDetailTableViewController.swift; sourceTree = "<group>"; };
+		2657E9F11AF5D05E008F92CE /* TweetImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetImageTableViewCell.swift; sourceTree = "<group>"; };
 		268047DA1AF08E4C00271FA6 /* Smashtag.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Smashtag.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		268047DE1AF08E4C00271FA6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		268047DF1AF08E4C00271FA6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 				2680480A1AF0922100271FA6 /* TweetTableViewCell.swift */,
 				268048011AF0917600271FA6 /* Twitter */,
 				268047DD1AF08E4C00271FA6 /* Supporting Files */,
+				2657E9F11AF5D05E008F92CE /* TweetImageTableViewCell.swift */,
 			);
 			path = Smashtag;
 			sourceTree = "<group>";
@@ -239,6 +242,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				268047E01AF08E4C00271FA6 /* AppDelegate.swift in Sources */,
+				2657E9F21AF5D05E008F92CE /* TweetImageTableViewCell.swift in Sources */,
 				268048131AF095B600271FA6 /* Tweet.swift in Sources */,
 				26232DC71AF1D9AC00F6888E /* TweetDetailTableViewController.swift in Sources */,
 				268048121AF095B600271FA6 /* MediaItem.swift in Sources */,
