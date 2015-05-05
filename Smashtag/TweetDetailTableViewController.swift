@@ -81,11 +81,6 @@ class TweetDetailTableViewController: UITableViewController {
             }
         }
     }
-    
-    override func viewDidLoad() {
-        tableView.estimatedRowHeight = tableView.rowHeight
-        tableView.rowHeight = UITableViewAutomaticDimension
-    }
 
     // MARK: - Table view data source
 
@@ -122,6 +117,7 @@ class TweetDetailTableViewController: UITableViewController {
         
         switch item {
         case .Media(let mediaItem):
+            // Since equation for aspect ratio is aspectRatio = width / height, solving for height... height = width / aspectRatio
             return tableView.bounds.size.width / CGFloat(mediaItem.aspectRatio)
         default:
             return UITableViewAutomaticDimension

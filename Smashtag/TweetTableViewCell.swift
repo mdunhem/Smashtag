@@ -28,12 +28,16 @@ class TweetTableViewCell: UITableViewCell {
         tweetCreatedLabel?.text = nil
         
         if let tweet = self.tweet {
-            tweetTextLabel?.text = tweet.text
-            if tweetTextLabel?.text != nil  {
-                for _ in tweet.media {
-                    tweetTextLabel.text! += " 📷"
-                }
+            var text = NSMutableAttributedString(string: tweet.text)
+            applyTextColorTo(text, withColor: UIColor.redColor(), usingIndexedKeywords: tweet.hashtags)
+            applyTextColorTo(text, withColor: UIColor.blueColor(), usingIndexedKeywords: tweet.urls)
+            applyTextColorTo(text, withColor: UIColor.orangeColor(), usingIndexedKeywords: tweet.userMentions)
+            
+            for _ in tweet.media {
+                text.appendAttributedString(NSAttributedString(string: " 📷"))
             }
+            
+            tweetTextLabel?.attributedText = text
             
             tweetScreenNameLabel?.text = "\(tweet.user)"
             
@@ -56,6 +60,13 @@ class TweetTableViewCell: UITableViewCell {
             tweetCreatedLabel?.text = formatter.stringFromDate(tweet.created)
         }
         
+    }
+    
+    // Simple little helper function to apply attributes
+    private func applyTextColorTo(attributedString: NSMutableAttributedString, withColor color: UIColor, usingIndexedKeywords indexedKeywords: [Tweet.IndexedKeyword]) {
+        for indexedKeyword in indexedKeywords {
+            attributedString.addAttribute(NSForegroundColorAttributeName, value: color, range: indexedKeyword.nsrange)
+        }
     }
 
 }
